@@ -1,0 +1,29 @@
+{
+  "name": "com.convalise.unity-material-symbols",
+  "version": "226.1.0",
+  "displayName": "Unity Material Symbols",
+  "description": "Simplifies the usage of Google's Material Symbols (Icons) on Unity.",
+  "keywords": [
+    "convalise",
+    "unity",
+    "google",
+    "material",
+    "icons",
+    "symbols"
+  ],
+  "author": "conrado <convalise@gmail.com> (https://github.com/convalise)",
+  "documentationUrl": "https://github.com/ebukaracer/UnityMaterialSymbols#quick-usage",
+  "changelogUrl": "https://github.com/ebukaracer/UnityMaterialSymbols/tags",
+  "licensesUrl": "https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/LICENSE",
+  "dependencies": {
+    "com.unity.ugui": "1.0.0",
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "samples": [
+    {
+      "displayName": "Demo",
+      "description": "An example scene containing a demo of the package.",
+      "path": "Samples~"
+    }
+  ]
+}
