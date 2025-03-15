@@ -42,6 +42,6 @@ To resolve this, I implemented an image generation feature that converts materia
 
 ---
 
-This project is licensed under the [Apache License 2.0](https://github.com/convalise/unity-material-symbols?tab=Apache-2.0-1-ov-file).  
+This project is licensed under the [Apache License 2.0](https://github.com/ebukaracer/UnityMaterialSymbols?tab=Apache-2.0-1-ov-file).  
 
 Credits to the original developer for laying a massive foundation.

@@ -25,9 +25,9 @@ URL: https://github.com/convalise/unity-material-symbols
 
 This forked version introduces two significant updates, organized into two branches:
 
-| **[feature]( https://github.com/ebukaracer/UnityMaterialSymbols/tree/feature)**       | [See changes](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-feature-branch)    |     |
-| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --- |
-| **[no-feature]( https://github.com/ebukaracer/UnityMaterialSymbols/tree/no-feature)** | [See changes](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-no-feature-branch) | /   |
+| [**feature**]( https://github.com/ebukaracer/UnityMaterialSymbols/tree/feature)       | [See changes](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-feature-branch)    |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [**no-feature**]( https://github.com/ebukaracer/UnityMaterialSymbols/tree/no-feature) | [See changes](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-no-feature-branch) |
 
 In most cases you'll be better off with the **no-feature** branch as this reflects what the [original repo](https://github.com/convalise/unity-material-symbols) does.
 
