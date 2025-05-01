@@ -23,29 +23,20 @@ Initial Forked Version -  `v226.0.0`
 Based on the original project by [Convalise](https://github.com/convalise)\
 URL: https://github.com/convalise/unity-material-symbols
 
-This forked version introduces two significant updates, organized into two branches:
-
-| [**feature**]( https://github.com/ebukaracer/UnityMaterialSymbols/tree/feature)       | [See changes](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-feature-branch)    |
-| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [**no-feature**]( https://github.com/ebukaracer/UnityMaterialSymbols/tree/no-feature) | [See changes](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-no-feature-branch) |
-
-In most cases you'll be better off with the **no-feature** branch as this reflects what the [original repo](https://github.com/convalise/unity-material-symbols) does.
+This forked version introduces significant [updates](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-feature-branch) organized into this: [branch](https://github.com/ebukaracer/UnityMaterialSymbols/tree/feature)
 
 ## Installation
 
 - Hit `(+)` and select `Add package from Git URL(Unity 2019.4+)` 
-- For the `feature` branch, paste the `git URL`: https://github.com/ebukaracer/UnityMaterialSymbols.git#feature
-- For the `no-feature` branch, do the same using:  https://github.com/ebukaracer/UnityMaterialSymbols.git#no-feature
+- Paste the `git URL`: https://github.com/ebukaracer/UnityMaterialSymbols.git#feature
 - Hit `Add`
--  If you're using assembly definition in your project, ensure to add this package's reference: `Convalise.MaterialSymbols`, under **Assembly Definition References**
-
-**Note: Both branches cannot be installed simultaneously, as one will override the other.**
+-  If you're using assembly definition in your project, ensure to add this package's reference: `Racer.MaterialSymbols`, under **Assembly Definition References**
 
 ## Quick Usage
 
 Simply add the `MaterialSymbol` component to your UI GameObject and you are good to go.
 
-Alternatively, a new object can be added to the scene by right-clicking on the hierarchy window and selecting `UI > Google > Material Symbol`.
+Alternatively, a new object can be added to the scene by right-clicking on the hierarchy window and selecting `UI > Google > New Material Symbol`.
 
 The inspector provides a window to easily select between the available symbols or icons.
 
@@ -96,6 +87,7 @@ public class Demo : MonoBehaviour
 This project was created by Conrado (https://github.com/convalise) as an improvement of the deprecated [Unity Material Icons](https://github.com/convalise/unity-material-icons).
 
 It makes usage of the [Material Design icons by Google (Material Symbols)](https://github.com/google/material-design-icons).\
+
 More information on the Google's project can be found at the [Material Symbols Guide](https://developers.google.com/fonts/docs/material_symbols).
 
 See [FAQs](https://github.com/convalise/unity-material-symbols#FAQ)

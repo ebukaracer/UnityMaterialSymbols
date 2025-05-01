@@ -13,10 +13,6 @@
 
 **Note:** To edit the config file for image generation, navigate to its location, enable debug mode while the file is focused in the inspector, then switch back to normal mode. The editable fields will become accessible afterward.
 
-### Changes made in the `no-feature` branch:
-
-- Includes all changes from the `feature` branch, except the image generation feature.
-
 ---
 
 ### Why this Image Generation Feature?
