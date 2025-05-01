@@ -1,12 +1,13 @@
 using System;
 using System.IO;
+using Racer.MaterialSymbols.Runtime;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Editor
 {
     public class SymbolToImageConverter
     {

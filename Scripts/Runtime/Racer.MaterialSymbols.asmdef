@@ -1,6 +1,6 @@
 {
-    "name": "Convalise.MaterialSymbols",
-    "rootNamespace": "Convalise",
+    "name": "Racer.MaterialSymbols",
+    "rootNamespace": "Racer",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

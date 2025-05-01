@@ -1,7 +1,8 @@
-using UnityEngine;
+using Racer.MaterialSymbols.Runtime;
 using UnityEditor;
+using UnityEngine;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Editor
 {
     [CustomPropertyDrawer(typeof(MaterialSymbolData))]
     public class MaterialSymbolDataDrawer : PropertyDrawer

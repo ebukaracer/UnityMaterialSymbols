@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Runtime
 {
     public class MaterialSymbol : Text
     {

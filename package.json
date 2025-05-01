@@ -1,17 +1,21 @@
 {
-  "name": "com.convalise.unity-material-symbols",
-  "version": "238.1.0",
-  "displayName": "Unity Material Symbols",
-  "description": "Simplifies the usage of Google's Material Symbols (Icons) on Unity.",
+  "name": "com.racer.material-symbols",
+  "version": "238.2.0",
+  "displayName": "Material Symbols",
+  "description": "Simplifies the usage of Google's Material Symbols (Icons) in Unity.\n\nOriginal author: Conrado\nUrl: conrado <convalise@gmail.com> (https://github.com/convalise)",
   "keywords": [
     "convalise",
+    "racer",
     "unity",
     "google",
     "material",
     "icons",
     "symbols"
   ],
-  "author": "conrado <convalise@gmail.com> (https://github.com/convalise)",
+   "author": {
+    "name": "Racer",
+    "url": "https://github.com/ebukaracer"
+  },
   "documentationUrl": "https://github.com/ebukaracer/UnityMaterialSymbols#quick-usage",
   "changelogUrl": "https://github.com/ebukaracer/UnityMaterialSymbols/tags",
   "licensesUrl": "https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/LICENSE",

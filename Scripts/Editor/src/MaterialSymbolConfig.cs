@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Editor
 {
     // Only one instance is required, uncomment if missing from the /resources folder.
     // [CreateAssetMenu(fileName = "MaterialSymbolsConfig")]

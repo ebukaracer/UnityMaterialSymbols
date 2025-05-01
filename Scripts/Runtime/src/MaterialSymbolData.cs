@@ -1,18 +1,17 @@
+using System;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Runtime
 {
+    [Serializable]
+    public struct MaterialSymbolData
+    {
+        public char code;
+        public bool fill;
 
-[System.Serializable]
-public struct MaterialSymbolData
-{
-	public char code;
-	public bool fill;
-
-	public MaterialSymbolData(char code, bool fill)
-	{
-		this.code = code;
-		this.fill = fill;
-	}
-}
-
+        public MaterialSymbolData(char code, bool fill)
+        {
+            this.code = code;
+            this.fill = fill;
+        }
+    }
 }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using Racer.MaterialSymbols.Runtime;
 using UnityEditor;
 using UnityEditor.UI;
-using System.Reflection;
+using UnityEngine;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Editor
 {
     [CustomEditor(typeof(MaterialSymbol), true), CanEditMultipleObjects]
     public class MaterialSymbolEditor : UnityEditor.UI.TextEditor

@@ -1,12 +1,13 @@
 ﻿using System;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Racer.MaterialSymbols.Runtime;
+using UnityEditor;
+using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Editor
 {
     public class MaterialSymbolSelectionWindow : EditorWindow
     {
@@ -373,7 +374,7 @@ namespace com.convalise.UnityMaterialSymbols
 
         private static void OpenAbout()
         {
-            Application.OpenURL("https://github.com/convalise/unity-material-symbols");
+            Application.OpenURL("https://github.com/ebukaracer/UnityMaterialSymbol");
         }
 
         private void ChangeSort(object i)

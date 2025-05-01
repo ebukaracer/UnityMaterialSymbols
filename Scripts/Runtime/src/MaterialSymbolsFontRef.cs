@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Runtime
 {
     public class MaterialSymbolsFontRef : ScriptableObject
     {

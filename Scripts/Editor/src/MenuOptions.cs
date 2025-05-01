@@ -1,27 +1,28 @@
 using System.IO;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using Racer.MaterialSymbols.Runtime;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace com.convalise.UnityMaterialSymbols
+namespace Racer.MaterialSymbols.Editor
 {
     internal static class MenuOptions
     {
         private static RemoveRequest _removeRequest;
-        private const string PkgId = "com.convalise.unity-material-symbols";
-        private const string MenuPathRoot = "Convalise/";
-        private const string SamplesPath = "Assets/Samples/Unity Material Symbols";
+        private const string PkgId = "com.racer.material-symbols";
+        private const string MenuPathRoot = "Racer/Google/";
+        private const string SamplesPath = "Assets/Samples/Material Symbols";
 
-        [MenuItem(MenuPathRoot + "Google/Material Symbol", priority = 0)]
+        [MenuItem(MenuPathRoot + "New Material Symbol", priority = 0)]
         private static void InitMaterialSymbol(MenuCommand menuCommand)
         {
             CreateMaterialSymbol(menuCommand);
         }
 
-        [MenuItem("GameObject/UI/Google/Material Symbol", false, 10)]
+        [MenuItem("GameObject/UI/Google/New Material Symbol", false, 10)]
         public static void CreateMaterialSymbol(MenuCommand menuCommand)
         {
             var parent = menuCommand.context as GameObject;
@@ -31,7 +32,7 @@ namespace com.convalise.UnityMaterialSymbols
 
             // If no canvas is found, try to find any canvas in the scene
             if (existingCanvas == null)
-                existingCanvas = Object.FindObjectOfType<Canvas>();
+                existingCanvas = Object.FindFirstObjectByType<Canvas>();
 
             // If there is still no canvas, create one
             if (existingCanvas == null)
