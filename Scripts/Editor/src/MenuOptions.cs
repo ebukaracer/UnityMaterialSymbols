@@ -95,7 +95,7 @@ namespace Racer.MaterialSymbols.Editor
 
                     break;
                 case >= StatusCode.Failure:
-                    Debug.LogWarning($"Failed to remove package: '{PkgId}'\n{_removeRequest.Error.message}");
+                    Debug.LogError($"Failed to remove package: '{PkgId}'\n{_removeRequest.Error.message}");
                     break;
             }
 
