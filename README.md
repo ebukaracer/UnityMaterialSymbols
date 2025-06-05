@@ -1,5 +1,4 @@
 # Material Symbols (Icons) for Unity
-
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue)](http://makeapullrequest.com)
 
 Add-on that simplifies the usage of Google's **Material Symbols** (previously known as Material Icons) on Unity. The motivation is to have a lightweight set of uniform icons in order to provide the same design throughout the application UI, improving UX.
@@ -26,19 +25,17 @@ URL: https://github.com/convalise/unity-material-symbols
 This forked version introduces significant [updates](https://github.com/ebukaracer/UnityMaterialSymbols/blob/main/NOTICE.md#changes-made-in-the-feature-branch) organized into this: [branch](https://github.com/ebukaracer/UnityMaterialSymbols/tree/feature)
 
 ## Installation
-
-- Hit `(+)` and select `Add package from Git URL(Unity 2019.4+)` 
-- Paste the `git URL`: https://github.com/ebukaracer/UnityMaterialSymbols.git#feature
-- Hit `Add`
--  If you're using assembly definition in your project, ensure to add this package's reference: `Racer.MaterialSymbols`, under **Assembly Definition References**
+_Inside the Unity Editor using the Package Manager:_
+- Click the **(+)** button in the Package Manager and select **"Add package from Git URL"** (requires Unity 2019.4 or later).
+-  Paste the Git URL of this package into the input box: https://github.com/ebukaracer/UnityMaterialSymbols.git#feature
+-  Click **Add** to install the package.
+-  If your project uses **Assembly Definitions**, make sure to add a reference to this package under **Assembly Definition References**. 
+    - For more help, see [this guide](https://ebukaracer.github.io/ebukaracer/md/SETUPGUIDE.html).
 
 ## Quick Usage
-
-Simply add the `MaterialSymbol` component to your UI GameObject and you are good to go.
-
-Alternatively, a new object can be added to the scene by right-clicking on the hierarchy window and selecting `UI > Google > New Material Symbol`.
-
-The inspector provides a window to easily select between the available symbols or icons.
+- Simply add the `MaterialSymbol` component to your UI GameObject and you are good to go.
+- Alternatively, a new object can be added to the scene by right-clicking on the hierarchy window and selecting `UI > Google > New Material Symbol`.
+- The inspector provides a window to easily select between the available symbols or icons.
 
 ---
 
@@ -83,7 +80,6 @@ public class Demo : MonoBehaviour
 ```
 
 ## Credits
-
 This project was created by Conrado (https://github.com/convalise) as an improvement of the deprecated [Unity Material Icons](https://github.com/convalise/unity-material-icons).
 
 It makes usage of the [Material Design icons by Google (Material Symbols)](https://github.com/google/material-design-icons).\
