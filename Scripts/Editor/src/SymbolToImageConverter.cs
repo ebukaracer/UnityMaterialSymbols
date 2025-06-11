@@ -124,27 +124,24 @@ namespace Racer.MaterialSymbols.Editor
             }
         }
 
-        public void PingConfigFile()
+        public static void PingConfigFile()
         {
-            EditorGUIUtility.PingObject(LoadConfig);
+            EditorGUIUtility.PingObject(MaterialSymbolConfig.Load);
         }
 
         private static MaterialSymbolConfig MaterialSymbolConfig
         {
             get
             {
-                var materialSymbolsConfig = LoadConfig;
+                var materialSymbolsConfig = MaterialSymbolConfig.Load;
 
                 if (materialSymbolsConfig.Filled || materialSymbolsConfig.Standard)
                     return materialSymbolsConfig;
 
-                Debug.LogError("TMP font reference(s) missing in the config asset.", LoadConfig);
+                Debug.LogError("TMP-Font reference(s) not found in the config asset!", MaterialSymbolConfig.Load);
                 return null;
             }
         }
-
-        private static MaterialSymbolConfig LoadConfig =>
-            Resources.Load<MaterialSymbolConfig>(nameof(MaterialSymbolConfig));
     }
 
     public static class CustomStyles
@@ -152,7 +149,7 @@ namespace Racer.MaterialSymbols.Editor
         public static readonly GUIContent GenerateImageBtn = new("Convert Symbol to Image",
             "Generates a png image of the selected symbol, based upon the fill, scale and color properties.");
 
-        public static readonly GUIContent PingConfigBtn = new("Config File?",
+        public static readonly GUIContent PingConfigBtn = new("Config Asset?",
             "Shows the location of the config file.");
 
         public static readonly GUIContent ReplaceToggle = new("Replace with Image Component",

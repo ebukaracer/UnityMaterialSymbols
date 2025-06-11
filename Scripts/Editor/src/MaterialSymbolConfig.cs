@@ -1,27 +1,32 @@
 using System;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
 namespace Racer.MaterialSymbols.Editor
 {
     // Only one instance is required, uncomment if missing from the /resources folder.
-    // [CreateAssetMenu(fileName = "MaterialSymbolsConfig")]
+    // [CreateAssetMenu(fileName = "MaterialSymbolConfig")]
     public class MaterialSymbolConfig : ScriptableObject
     {
+        private static MaterialSymbolConfig _instance;
+
         private const string DefaultSymbolSavePath = "Assets/Material Symbols";
 
         [field: SerializeField] public TMP_FontAsset Standard { get; private set; }
         [field: SerializeField] public TMP_FontAsset Filled { get; private set; }
 
         [Space(10)]
-        [SerializeField, Tooltip("Path to save the created symbol images.\nRight click to reset it to default."),
+        [SerializeField,
+         Tooltip(
+             "The directory path where created symbol images will be saved.\nRight-click to reset this path to the default location."),
          ContextMenuItem(nameof(ResetToDefaultSavePath), nameof(ResetToDefaultSavePath))]
         private string symbolSavePath = DefaultSymbolSavePath;
 
-        [SerializeField, Tooltip("Allow filled symbols to overwrite standard symbols when both exist.")]
-        private bool allowFilledSymbolsOverride = true;
+        [SerializeField, Tooltip("Allow filled symbol images overwrite standard ones when both exist in the project.")]
+        private bool allowFilledSymbolsOverwrite = true;
 
-        [field: SerializeField, Tooltip("Prevent debug logs after symbol has been created.")]
+        [field: SerializeField, Tooltip("Suppress debug logs after a symbol has been created.")]
         public bool SilenceLogs { get; private set; }
 
 
@@ -49,10 +54,26 @@ namespace Racer.MaterialSymbols.Editor
 
         public string FileName(bool isFilled)
         {
-            if (!allowFilledSymbolsOverride)
+            if (!allowFilledSymbolsOverwrite)
                 return isFilled ? "_fill" : "_no-fill";
 
             return string.Empty;
+        }
+
+        public static MaterialSymbolConfig Load
+        {
+            get
+            {
+                if (_instance) return _instance;
+
+                _instance = Resources.Load<MaterialSymbolConfig>(nameof(MaterialSymbolConfig));
+
+                if (!_instance)
+                    throw new FileNotFoundException(
+                        $"{nameof(MaterialSymbolConfig)} asset not found! Re-install this package to fix the issue.");
+
+                return _instance;
+            }
         }
     }
 }

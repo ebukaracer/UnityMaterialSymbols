@@ -82,7 +82,7 @@ namespace Racer.MaterialSymbols.Editor
             }
 
             if (GUILayout.Button(CustomStyles.PingConfigBtn))
-                _symbolToImageConverter.PingConfigFile();
+                SymbolToImageConverter.PingConfigFile();
 
             EditorGUILayout.EndVertical();
 
