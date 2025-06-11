@@ -32,13 +32,12 @@ _Inside the Unity Editor using the Package Manager:_
 -  If your project uses **Assembly Definitions**, make sure to add a reference to this package under **Assembly Definition References**. 
     - For more help, see [this guide](https://ebukaracer.github.io/ebukaracer/md/SETUPGUIDE.html).
 
-## Quick Usage
+## Setup
 - Simply add the `MaterialSymbol` component to your UI GameObject and you are good to go.
 - Alternatively, a new object can be added to the scene by right-clicking on the hierarchy window and selecting `UI > Google > New Material Symbol`.
 - The inspector provides a window to easily select between the available symbols or icons.
 
----
-
+## Quick Usage
 The `MaterialSymbol` class inherits from `UnityEngine.UI.Text`, so it has all properties and methods available [here](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/script-Text.html) such as `color` and `raycast target`.
 
 Each icon is composed by a pair of a [unicode-escaped char](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char#literals) and a Boolean representing the glyph code and the fill status respectively.
@@ -47,11 +46,11 @@ The icon can be set programmatically by setting the `Symbol` field with a new `M
 ```cs
 public class Demo : MonoBehaviour  
 {  
-    private MaterialSymbol _materialSymbol;
-
+	private MaterialSymbol _materialSymbol;
+	
 	private void Start()  
 	{  
-	    _materialSymbol.Symbol = new MaterialSymbolData('\uEF55', false);  
+		_materialSymbol.Symbol = new MaterialSymbolData('\uEF55', false);  
 	}
 }
 ```
@@ -66,11 +65,11 @@ Additionally, a serialized `MaterialSymbolData` field can be used to bring the `
 ```cs
 public class Demo : MonoBehaviour  
 {  
-    private MaterialSymbol _materialSymbol;
-    
-    [SerializeField]
-    private MaterialSymbolData symbolData;
-
+	private MaterialSymbol _materialSymbol;
+	
+	[SerializeField]
+	private MaterialSymbolData symbolData;
+	
 	private void Start()  
 	{  
 		_materialSymbol.Symbol = symbolData;  
@@ -79,10 +78,12 @@ public class Demo : MonoBehaviour
 }
 ```
 
+Locate the `Config Asset` under `Packages > MaterialSymbols > Resources > MaterialSymbolConfig` to edit certain fields such as the location to store the generated symbol images and so on. Assuming the fields are greyed out(non-editable), then enable `Debug` mode while the asset is focused in the inspector, then switch back to `Normal` mode. The non-editable fields will become editable afterward.
+
 ## Credits
 This project was created by Conrado (https://github.com/convalise) as an improvement of the deprecated [Unity Material Icons](https://github.com/convalise/unity-material-icons).
 
-It makes usage of the [Material Design icons by Google (Material Symbols)](https://github.com/google/material-design-icons).\
+It makes usage of the [Material Design icons by Google (Material Symbols)](https://github.com/google/material-design-icons).
 
 More information on the Google's project can be found at the [Material Symbols Guide](https://developers.google.com/fonts/docs/material_symbols).
 

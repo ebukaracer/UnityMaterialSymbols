@@ -11,8 +11,6 @@
 - Added a convenient menu option to quickly create a new symbol and cleanly uninstall the package.
 - Fixed an issue where creating a new symbol would incorrectly initialize a new UI canvas instead of nesting it within an existing one (prioritizing existing canvases).
 
-**Note:** To edit the config file for image generation, navigate to its location, enable debug mode while the file is focused in the inspector, then switch back to normal mode. The editable fields will become accessible afterward.
-
 ---
 
 ### Why this Image Generation Feature?
