@@ -80,6 +80,7 @@ public class Demo : MonoBehaviour
 
 Locate the `Config Asset` under `Packages > MaterialSymbols > Resources > MaterialSymbolConfig` to edit certain fields such as the location to store the generated symbol images and so on. Assuming the fields are greyed out(non-editable), then enable `Debug` mode while the asset is focused in the inspector, then switch back to `Normal` mode. The non-editable fields will become editable afterward.
 
+To remove this package, navigate to: `Racer > Google > Remove Package`
 ## Credits
 This project was created by Conrado (https://github.com/convalise) as an improvement of the deprecated [Unity Material Icons](https://github.com/convalise/unity-material-icons).
 
