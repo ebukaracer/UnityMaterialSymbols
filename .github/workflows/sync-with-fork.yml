@@ -1,0 +1,129 @@
+name: Selective Sync From Fork
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (no commits or pushes)'
+        required: false
+        default: 'true'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout your fork repository
+      - name: Checkout your fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Step 2: Configure Git user (required for committing)
+      - name: Set up Git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 3: Extract version number from the latest master commit message
+      - name: Extract version from master commit message
+        id: version
+        run: |
+          git checkout master
+          message=$(git log -1 --pretty=%B)
+          echo "Latest commit message: $message"
+          if [[ "$message" =~ v([0-9]+) ]]; then
+            major="${BASH_REMATCH[1]}"
+            version="${major}.1.0"
+            tag="v$version"
+            echo "version=$version" >> $GITHUB_OUTPUT
+            echo "tag=$tag" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Failed to extract version number from commit message"
+            exit 1
+          fi
+
+      ########################################
+      # MAIN BRANCH — Update URLs.md + Tag   #
+      ########################################
+      # Step 4: Replace URLs.md in main branch and tag if version found
+      - name: Replace URLs.md in main
+        run: |
+          git checkout main
+          git pull origin main
+          git checkout master -- URLs.md
+          git add URLs.md
+          commit_msg=$'Update doc files(${{ steps.version.outputs.version }})\n\n## Changes(major+, minor*, fix-)\n\nSync URL changes with feature branch*\nUpdate readme-'
+
+          # DRY RUN MODE: only show commit message, stash changes
+          if [[ "${{ github.event.inputs.dry_run }}" == "true" ]]; then
+            echo "🔍 DRY RUN: Would commit and push to main branch"
+            git stash push -m "temp save URLs.md update"
+            echo "$commit_msg"
+          else
+            # If there are changes, commit and push, then tag
+            if git diff --cached --quiet; then
+              echo "🟡 No changes to commit."
+            else
+              echo "$commit_msg" | git commit -F -
+              git push origin main
+              git tag ${{ steps.version.outputs.tag }}
+              git push origin ${{ steps.version.outputs.tag }}
+            fi
+          fi
+
+      ##########################################
+      # FEATURE BRANCH — Merge Fonts & Version #
+      ##########################################
+      # Step 5: Merge Fonts and update version in feature branch
+      - name: Merge Fonts and bump version in feature
+        run: |
+          git checkout feature
+          git pull origin feature
+
+          # Extract only the Fonts directory from master without touching Git index
+          mkdir tmp_fonts
+          git archive master src/UnityMaterialSymbols/Assets/MaterialSymbols/Fonts | tar -x -C tmp_fonts
+
+          # Sync into the correct destination
+          rsync -a tmp_fonts/src/UnityMaterialSymbols/Assets/MaterialSymbols/Fonts/ Fonts/
+
+          # Clean up the temp folder safely
+          rm -rf tmp_fonts
+
+          # Stage fonts directory for commit
+          git add Fonts/
+
+          # Update package.json version using jq
+          jq --arg v "${{ steps.version.outputs.version }}" '.version = $v' package.json > tmp && mv tmp package.json
+          git add package.json
+
+          commit_msg=$'Update package(${{ steps.version.outputs.version }})\n\n## Changes(major+, minor*, fix-)\n\nAdd new font symbols*'
+
+          # DRY RUN MODE: only show commit message
+          if [[ "${{ github.event.inputs.dry_run }}" == "true" ]]; then
+            echo "🔍 DRY RUN: Would commit and push to feature branch"
+            echo "$commit_msg"
+          else
+            # If there are changes, commit and push
+            if git diff --cached --quiet; then
+              echo "🟡 No changes to commit. Skipping commit step."
+            else
+              echo "$commit_msg" | git commit -F -
+              git push origin feature
+            fi
+          fi
+
+      ##################################
+      # Cleanup — Clear stash if needed
+      ##################################
+      # Step 6: Cleanup stash after real commit
+      - name: Clear stash after real commit
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          if git stash list | grep -q 'On main'; then
+            echo "🧹 Clearing leftover stash..."
+            git stash drop stash@{0}
+          else
+            echo "✅ No stash to clear"
+          fi
