@@ -1,9 +1,6 @@
 name: Selective Sync From Fork
 
 on:
-  push:
-    branches:
-      - master 
   workflow_dispatch:
     inputs:
       dry_run:
