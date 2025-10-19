@@ -1,12 +1,10 @@
 # Material Symbols (Icons) for Unity
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue)](http://makeapullrequest.com)
 
-Add-on that simplifies the usage of Google's **Material Symbols** (previously known as Material Icons) on Unity. The motivation is to have a lightweight set of uniform icons in order to provide the same design throughout the application UI, improving UX.
+An add-on that simplifies the use of Google's **Material Symbols** (formerly known as Material Icons) in Unity. The goal is to provide a lightweight, uniform set of icons to ensure consistent design throughout the application’s user interface, ultimately enhancing the user experience.
 
-Recommended Unity versions are 2022 or higher.\
-Supported Unity versions are 2017 or higher.
-
-<a href='https://raw.githubusercontent.com/convalise/unity-material-symbols/master/doc/preview.png'><img src='doc/preview.png' width='100%'/></a>
+Recommended Unity version: 2022 or higher\
+Supported Unity version: 2017 or higher
 
 ## Samples Gallery
 
@@ -33,16 +31,16 @@ _Inside the Unity Editor using the Package Manager:_
     - For more help, see [this guide](https://ebukaracer.github.io/ebukaracer/md/SETUPGUIDE.html).
 
 ## Setup
-- Simply add the `MaterialSymbol` component to your UI GameObject and you are good to go.
+- Simply add the `MaterialSymbol` component to your UI GameObject, and you are good to go.
 - Alternatively, a new object can be added to the scene by right-clicking on the hierarchy window and selecting `UI > Google > New Material Symbol`.
 - The inspector provides a window to easily select between the available symbols or icons.
 
 ## Quick Usage
 The `MaterialSymbol` class inherits from `UnityEngine.UI.Text`, so it has all properties and methods available [here](https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/script-Text.html) such as `color` and `raycast target`.
 
-Each icon is composed by a pair of a [unicode-escaped char](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char#literals) and a Boolean representing the glyph code and the fill status respectively.
+Each icon is made up of two values: a [unicode-escaped char](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char#literals) for the symbol itself, and a boolean to indicate whether it's filled or outlined.
 
-The icon can be set programmatically by setting the `Symbol` field with a new `MaterialSymbolData` object:
+The icon can be set programmatically by assigning a new `MaterialSymbolData` object to the `symbol` field:
 ```cs
 public class Demo : MonoBehaviour  
 {  
@@ -55,13 +53,13 @@ public class Demo : MonoBehaviour
 }
 ```
 
-It can also be set directly by setting the `Code` and `Fill` properties:
+It can also be set directly by assigning the `code` and `fill` properties:
 ```cs
 _materialSymbol.Code = '\uEF55';  
 _materialSymbol.Fill = false;
 ```
 
-Additionally, a serialized `MaterialSymbolData` field can be used to bring the `Symbol` inspector on any class:
+Additionally, a serialized `MaterialSymbolData` field can be used to expose the icon inspector in any class:
 ```cs
 public class Demo : MonoBehaviour  
 {  
@@ -78,14 +76,18 @@ public class Demo : MonoBehaviour
 }
 ```
 
-Locate the `Config Asset` under `Packages > MaterialSymbols > Resources > MaterialSymbolConfig` to edit certain fields such as the location to store the generated symbol images and so on. Assuming the fields are greyed out(non-editable), then enable `Debug` mode while the asset is focused in the inspector, then switch back to `Normal` mode. The non-editable fields will become editable afterward.
+## Extras
+Locate the `Config Asset` under `Packages > MaterialSymbols > Resources > MaterialSymbolConfig` to edit certain fields, such as the location to store the generated symbol images and so on. Assuming the fields are greyed out(non-editable), then enable `Debug` mode while the asset is focused in the inspector, then switch back to `Normal` mode. The non-editable fields will become editable afterwards.
 
 To remove this package, navigate to: `Racer > Google > Remove Package`
+
 ## Credits
-This project was created by Conrado (https://github.com/convalise) as an improvement of the deprecated [Unity Material Icons](https://github.com/convalise/unity-material-icons).
+This project was created originally by Conrado (https://github.com/convalise) as an improvement of the deprecated [Unity Material Icons](https://github.com/convalise/unity-material-icons).
 
 It makes usage of the [Material Design icons by Google (Material Symbols)](https://github.com/google/material-design-icons).
 
 More information on the Google's project can be found at the [Material Symbols Guide](https://developers.google.com/fonts/docs/material_symbols).
 
-See [FAQs](https://github.com/convalise/unity-material-symbols#FAQ)
+See [Original Docs](https://github.com/convalise/unity-material-symbols?tab=readme-ov-file#documentation).
+
+See [FAQs](https://github.com/convalise/unity-material-symbols#FAQ).
