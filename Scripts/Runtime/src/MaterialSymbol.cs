@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Racer.MaterialSymbols.Runtime
 {
+    [HelpURL("https://github.com/ebukaracer/UnityMaterialSymbols?tab=readme-ov-file#setup")]
     public class MaterialSymbol : Text
     {
         [SerializeField] private MaterialSymbolData symbol;

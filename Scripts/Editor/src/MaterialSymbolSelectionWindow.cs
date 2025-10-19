@@ -244,7 +244,8 @@ namespace Racer.MaterialSymbols.Editor
                 menu.AddItem(_styles.GCMenuFocusSearch, _allowFocusSearchField, ToggleFocusSearch);
                 menu.AddItem(_styles.GCMenuEnableRegex, _enableRegexSearch, ToggleRegexSearch);
                 menu.AddSeparator(string.Empty);
-                menu.AddItem(_styles.GCMenuAbout, false, OpenAbout);
+                menu.AddItem(_styles.GCMenuRepository, false, OpenRepositorySite);
+                menu.AddItem(_styles.GCMenuGoogleFonts, false, OpenGoogleFontsWebsite);
                 menu.DropDown(rectSettingsButton);
             }
 
@@ -372,9 +373,14 @@ namespace Racer.MaterialSymbols.Editor
             EditorPrefs.SetBool(_keepActiveInViewEpk, _allowKeepActiveInView = !_allowKeepActiveInView);
         }
 
-        private static void OpenAbout()
+        private static void OpenRepositorySite()
         {
-            Application.OpenURL("https://github.com/ebukaracer/UnityMaterialSymbol");
+            Application.OpenURL("https://github.com/ebukaracer/UnityMaterialSymbols");
+        }
+
+        private void OpenGoogleFontsWebsite()
+        {
+            Application.OpenURL("https://fonts.google.com/icons");
         }
 
         private void ChangeSort(object i)
@@ -520,8 +526,9 @@ namespace Racer.MaterialSymbols.Editor
             public GUIContent GCMenuFocusSearch { get; }
             public GUIContent GCMenuEnableRegex { get; }
             public GUIContent GCMenuKeepView { get; }
-            public GUIContent GCMenuAbout { get; }
 
+            public GUIContent GCMenuRepository { get; private set; }
+            public GUIContent GCMenuGoogleFonts { get; private set; }
             public GUIStyle GsToolbar { get; }
             public GUIStyle GsToolbarButton { get; }
             public GUIStyle GsToolbarSearchField { get; }
@@ -547,7 +554,8 @@ namespace Racer.MaterialSymbols.Editor
                 GCMenuFocusSearch = new GUIContent("Focus Search Field on Open");
                 GCMenuEnableRegex = new GUIContent("Search Using Regular Expression");
                 GCMenuKeepView = new GUIContent("Keep Selection in View");
-                GCMenuAbout = new GUIContent("About...");
+                GCMenuRepository = new GUIContent("Open GitHub Repository...");
+                GCMenuGoogleFonts = new GUIContent("Open Material Symbols Library...");
 
                 GsToolbarSearchField = new GUIStyle("TextField");
 
