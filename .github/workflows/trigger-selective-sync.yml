@@ -1,0 +1,19 @@
+name: Trigger Selective Sync After Fork Update # fires automatically
+
+on:
+  push:
+    branches:
+      - master  # fires when the fork's master branch updates (e.g. via Sync fork)
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate gh CLI
+        run: gh auth setup-git && echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Trigger Selective Sync From Fork workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run "Selective Sync From Fork" --field dry_run=false
