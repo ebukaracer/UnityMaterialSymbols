@@ -28,14 +28,14 @@ namespace Racer.MaterialSymbols.Editor
             var parent = menuCommand.context as GameObject;
 
             // Check if the selected parent or its ancestors contain a canvas
-            var existingCanvas = parent != null ? parent.GetComponentInParent<Canvas>() : null;
+            var existingCanvas = parent ? parent.GetComponentInParent<Canvas>() : null;
 
             // If no canvas is found, try to find any canvas in the scene
-            if (existingCanvas == null)
+            if (!existingCanvas)
                 existingCanvas = Object.FindFirstObjectByType<Canvas>();
 
             // If there is still no canvas, create one
-            if (existingCanvas == null)
+            if (!existingCanvas)
             {
                 var canvas = new GameObject("Canvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster))
                 {
@@ -45,7 +45,7 @@ namespace Racer.MaterialSymbols.Editor
                 Undo.RegisterCreatedObjectUndo(canvas, "Create " + canvas.name);
 
 #if UNITY_2022_3_OR_NEWER
-                if (Object.FindAnyObjectByType<EventSystem>() == null)
+                if (!Object.FindAnyObjectByType<EventSystem>())
 #else
                 if (Object.FindObjectOfType<EventSystem>() == null)
 #endif

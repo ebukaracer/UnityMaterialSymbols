@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Racer.MaterialSymbols.Editor
 {
-    public class MaterialSymbolSelectionWindow : EditorWindow
+    internal class MaterialSymbolSelectionWindow : EditorWindow
     {
         private CodepointData[] _codepointsCollection;
         private CodepointData[] _filteredCollection;
@@ -36,7 +36,7 @@ namespace Racer.MaterialSymbols.Editor
         private int _columns;
         private int _rows;
 
-        private Styles _styles;
+        private static Styles _styles;
 
         private readonly string _showNamesEpk = typeof(MaterialSymbolSelectionWindow) + ".showNames";
         private readonly string _focusSearchFieldEpk = typeof(MaterialSymbolSelectionWindow) + ".focusSearchField";
@@ -105,7 +105,7 @@ namespace Racer.MaterialSymbols.Editor
 
         private void OnGUI()
         {
-            if (_fontRef == null)
+            if (!_fontRef)
             {
                 EditorGUILayout.HelpBox("Could not find fonts reference.", MessageType.Error);
                 return;

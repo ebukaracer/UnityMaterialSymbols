@@ -5,10 +5,9 @@ using UnityEngine;
 namespace Racer.MaterialSymbols.Editor
 {
     [CustomPropertyDrawer(typeof(MaterialSymbolData))]
-    public class MaterialSymbolDataDrawer : PropertyDrawer
+    internal class MaterialSymbolDataDrawer : PropertyDrawer
     {
-        public static Styles Style;
-        private Styles _styles;
+        private static Styles _styles;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -58,13 +57,11 @@ namespace Racer.MaterialSymbols.Editor
                 GUI.Label(position, _styles.GCSymbol, _styles.GsSymbol);
             }
 
-            Style = _styles;
-
             EditorGUI.EndProperty();
         }
 
 
-        public class Styles
+        private class Styles
         {
             public MaterialSymbolsFontRef FontRef { get; } = MaterialSymbol.LoadFontRef();
 

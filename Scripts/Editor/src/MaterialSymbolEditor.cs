@@ -3,11 +3,12 @@ using Racer.MaterialSymbols.Runtime;
 using UnityEditor;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Racer.MaterialSymbols.Editor
 {
     [CustomEditor(typeof(MaterialSymbol), true), CanEditMultipleObjects]
-    public class MaterialSymbolEditor : UnityEditor.UI.TextEditor
+    internal class MaterialSymbolEditor : UnityEditor.UI.TextEditor
     {
         private SerializedProperty _spSymbol;
         private SerializedProperty _spFill;
@@ -54,7 +55,7 @@ namespace Racer.MaterialSymbols.Editor
 
             DoTextAlignmentControl(_pdFontData, _spAlignment);
 
-            EditorGUILayout.Space();
+            GUILayout.Space(0);
 
             AppearanceControlsGUI();
             RaycastControlsGUI();
@@ -64,16 +65,16 @@ namespace Racer.MaterialSymbols.Editor
 
             #region Convert Symbol to Image
 
-            EditorGUILayout.Space(10);
+            GUILayout.Space(10);
 
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            GUILayout.BeginVertical(EditorStyles.helpBox);
 
             _replaceWithImageComp.boolValue =
                 EditorGUILayout.ToggleLeft(CustomStyles.ReplaceToggle, _replaceWithImageComp.boolValue);
 
             serializedObject.ApplyModifiedProperties();
 
-            EditorGUILayout.Space(5);
+            GUILayout.Space(5);
 
             if (GUILayout.Button(CustomStyles.GenerateImageBtn))
             {
@@ -84,7 +85,7 @@ namespace Racer.MaterialSymbols.Editor
             if (GUILayout.Button(CustomStyles.PingConfigBtn))
                 SymbolToImageConverter.PingConfigFile();
 
-            EditorGUILayout.EndVertical();
+            GUILayout.EndVertical();
 
             #endregion
         }
@@ -135,5 +136,17 @@ namespace Racer.MaterialSymbols.Editor
         }
 
         private static MethodInfo _miDoTextAlignmentControl;
+    }
+
+    public static class CustomStyles
+    {
+        public static readonly GUIContent GenerateImageBtn = new("Convert Symbol to Image",
+            "Generates a png image of the selected symbol, based upon the fill, scale and color properties.");
+
+        public static readonly GUIContent PingConfigBtn = new("Config Asset?",
+            "Shows the location of the config file.");
+
+        public static readonly GUIContent ReplaceToggle = new("Replace with Image Component",
+            $"Whether or not to replace the '{nameof(MaterialSymbol)}' with an '{nameof(Image)}' component, with its sprite set to the generated image, after the conversion.");
     }
 }

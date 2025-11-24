@@ -64,7 +64,7 @@ namespace Racer.MaterialSymbols.Runtime
                 Init();
             }
 
-            if (font == null)
+            if (!font)
             {
                 UpdateSymbol();
             }
@@ -90,12 +90,18 @@ namespace Racer.MaterialSymbols.Runtime
         {
             symbol = new MaterialSymbolData('\uef55', false);
 
+            // Even-out dimension
+            var rect = rectTransform.rect;
+            rect.width = 100;
+            rect.height = 100;
+
             base.text = null;
             font = null;
             base.color = Color.white;
             base.material = null;
             alignment = TextAnchor.MiddleCenter;
             supportRichText = false;
+            raycastTarget = false;
             horizontalOverflow = HorizontalWrapMode.Overflow;
             verticalOverflow = VerticalWrapMode.Overflow;
 
@@ -106,20 +112,25 @@ namespace Racer.MaterialSymbols.Runtime
         /// <summary> Updates font based on fill state. </summary>
         private void UpdateSymbol()
         {
-            if (_fontRef == null)
+            if (!_fontRef)
                 _fontRef = LoadFontRef();
 
-            if (_fontRef != null)
+            if (_fontRef)
                 font = symbol.fill ? _fontRef.Filled : _fontRef.Standard;
 
             base.text = symbol.code.ToString();
         }
 
-        /// <summary> Updates font size based on transform size. </summary>
         private void UpdateFontSize()
         {
-            fontSize = Mathf.FloorToInt(Mathf.Min(rectTransform.rect.width, rectTransform.rect.height) *
-                                        scale);
+            var rect = rectTransform.rect;
+
+            // Material Symbols visual fill factor
+            const float glyphFillCompensation = 1.38f;
+
+            fontSize = Mathf.FloorToInt(Mathf.Min(rect.width, rect.height) *
+                                        scale *
+                                        glyphFillCompensation);
         }
 
         protected override void OnRectTransformDimensionsChange()
@@ -143,7 +154,7 @@ namespace Racer.MaterialSymbols.Runtime
             }
             catch (System.Exception)
             {
-                return default(string);
+                return null;
             }
         }
 
@@ -156,7 +167,7 @@ namespace Racer.MaterialSymbols.Runtime
             }
             catch (System.Exception)
             {
-                return default;
+                return '\0';
             }
         }
     }
