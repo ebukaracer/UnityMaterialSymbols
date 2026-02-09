@@ -17,13 +17,83 @@ namespace Racer.MaterialSymbols.Editor
         private const string SamplesPath = "Assets/Samples/Material Symbols";
 
         [MenuItem(MenuPathRoot + "New Material Symbol", priority = 0)]
-        private static void InitMaterialSymbol(MenuCommand menuCommand)
+        private static void NewMaterialSymbolContext(MenuCommand menuCommand)
         {
             CreateMaterialSymbol(menuCommand);
         }
 
-        [MenuItem("GameObject/UI/Google/New Material Symbol", false, 10)]
+        [MenuItem(MenuPathRoot + "Button - Material Symbol", priority = 1)]
+        private static void MaterialSymbolButtonContext(MenuCommand menuCommand)
+        {
+            CreateMaterialSymbolButton(menuCommand);
+        }
+
+        [MenuItem("GameObject/UI/Google/New Material Symbol", false, 9)]
         public static void CreateMaterialSymbol(MenuCommand menuCommand)
+        {
+            var parent = GetParent(menuCommand);
+
+            // Create the MaterialSymbol object
+            var gameObject = new GameObject("MaterialSymbol", typeof(MaterialSymbol))
+            {
+                layer = LayerMask.NameToLayer("UI")
+            };
+            GameObjectUtility.SetParentAndAlign(gameObject, parent);
+            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
+            Selection.activeObject = gameObject;
+        }
+
+        [MenuItem("GameObject/UI/Google/Button - Material Symbol", false, 10)]
+        public static void CreateMaterialSymbolButton(MenuCommand menuCommand)
+        {
+            var parent = GetParent(menuCommand);
+
+            // Create the Button object
+            var button = new GameObject("Button", typeof(Button), typeof(Image))
+            {
+                layer = LayerMask.NameToLayer("UI")
+            };
+
+            // Change the rect transform of the MaterialSymbol to fit inside the button
+            var buttonRect = button.GetComponent<RectTransform>();
+            if (MaterialSymbolConfig && !MaterialSymbolConfig.PreferSquaredButton)
+                buttonRect.sizeDelta = new Vector2(150, 50);
+            else
+                buttonRect.sizeDelta = new Vector2(50, 50);
+
+            // Add the default UI sprite to the button's Image component
+            var image = button.GetComponent<Image>();
+            image.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
+            image.type = Image.Type.Sliced;
+
+            // Set the button as a child of the selected parent or canvas
+            GameObjectUtility.SetParentAndAlign(button, parent);
+
+            // Create the MaterialSymbol object
+            var materialSymbol = new GameObject("MaterialSymbol", typeof(MaterialSymbol))
+            {
+                layer = LayerMask.NameToLayer("UI")
+            };
+
+            // Adjust the MaterialSymbol's transform to fit inside the button
+            var symbolRect = materialSymbol.GetComponent<RectTransform>();
+            symbolRect.anchorMin = Vector2.zero;
+            symbolRect.anchorMax = Vector2.one;
+            symbolRect.offsetMin = Vector2.zero;
+            symbolRect.offsetMax = Vector2.zero;
+
+            // Set the default color and scale for the MaterialSymbol component
+            var materialSymbolComponent = materialSymbol.GetComponent<MaterialSymbol>();
+            materialSymbolComponent.Scale = 0.5f;
+            materialSymbolComponent.color = new Color(76, 76, 76, 255) / 255f;
+            materialSymbolComponent.Fill = MaterialSymbolConfig && MaterialSymbolConfig.PreferFilledSymbol;
+
+            GameObjectUtility.SetParentAndAlign(materialSymbol, button);
+
+            Undo.RegisterCreatedObjectUndo(button, $"Create {button.name}");
+        }
+
+        private static GameObject GetParent(MenuCommand menuCommand)
         {
             var parent = menuCommand.context as GameObject;
 
@@ -47,7 +117,7 @@ namespace Racer.MaterialSymbols.Editor
 #if UNITY_2022_3_OR_NEWER
                 if (!Object.FindAnyObjectByType<EventSystem>())
 #else
-                if (Object.FindObjectOfType<EventSystem>() == null)
+                if (!Object.FindFirstObjectByType<EventSystem>())
 #endif
                 {
                     var eventSystem = new GameObject("EventSystem", typeof(EventSystem),
@@ -63,15 +133,23 @@ namespace Racer.MaterialSymbols.Editor
                 parent ??= existingCanvas.gameObject;
             }
 
-            // Create the MaterialSymbol object
-            var gameObject = new GameObject("MaterialSymbol", typeof(MaterialSymbol))
-            {
-                layer = LayerMask.NameToLayer("UI")
-            };
-            GameObjectUtility.SetParentAndAlign(gameObject, parent);
-            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
-            Selection.activeObject = gameObject;
+            return parent;
         }
+
+        private static MaterialSymbolConfig MaterialSymbolConfig
+        {
+            get
+            {
+                var materialSymbolsConfig = MaterialSymbolConfig.Load;
+
+                if (materialSymbolsConfig.Filled || materialSymbolsConfig.Standard)
+                    return materialSymbolsConfig;
+
+                Debug.LogError("TMP-Font reference(s) not found in the config asset!", MaterialSymbolConfig.Load);
+                return null;
+            }
+        }
+
 
         [MenuItem(MenuPathRoot + "Remove Package(recommended)", priority = 1)]
         private static void RemovePackage()

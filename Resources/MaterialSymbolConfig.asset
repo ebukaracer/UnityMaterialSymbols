@@ -15,5 +15,7 @@ MonoBehaviour:
   <Standard>k__BackingField: {fileID: 11400000, guid: a2cf82df2e60a8d4abacc1aaf3805a6f, type: 2}
   <Filled>k__BackingField: {fileID: 11400000, guid: 6684dc65007b73844934989a73c8c779, type: 2}
   symbolSavePath: Assets/Material Symbols
-  useNameDistinction: 0
+  useDistinctNames: 0
   promptBeforeOverwrite: 1
+  preferFilledSymbol: 0
+  preferSquaredButton: 0

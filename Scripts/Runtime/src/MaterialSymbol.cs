@@ -145,7 +145,7 @@ namespace Racer.MaterialSymbols.Runtime
             return Resources.Load<MaterialSymbolsFontRef>("MaterialSymbolsFontRef");
         }
 
-        /// <summary> Converts from unicode char to hexadecimal string representation. </summary>
+        /// <summary> Converts from Unicode char to hexadecimal string representation. </summary>
         public static string ConvertCharToHex(char code)
         {
             try
@@ -158,7 +158,7 @@ namespace Racer.MaterialSymbols.Runtime
             }
         }
 
-        /// <summary> Converts from hexadecimal string representation to unicode char. </summary>
+        /// <summary> Converts from hexadecimal string representation to Unicode char. </summary>
         public static char ConvertHexToChar(string hex)
         {
             try

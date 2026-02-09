@@ -26,13 +26,24 @@ namespace Racer.MaterialSymbols.Editor
 
         [SerializeField,
          Tooltip(
-             "If enabled, filled symbols will automatically overwrite standard symbols and no name distinction will be used.")]
-        private bool useNameDistinction;
+             "When checked, filled symbols will automatically overwrite standard symbols and no name distinction will be used.")]
+        private bool useDistinctNames;
 
         [SerializeField,
-         Tooltip("If enabled, prompts the user before overwriting existing symbol image files.")]
+         Tooltip("When checked, prompts before overwriting existing symbol images.")]
         private bool promptBeforeOverwrite = true;
 
+        [SerializeField,
+         Tooltip("Create filled symbols instead of non-filled ones.")]
+        private bool preferFilledSymbol;
+
+        [SerializeField,
+         Tooltip("Create perfectly square symbols instead of rectangular ones.")]
+        private bool preferSquaredButton;
+
+        public bool PreferFilledSymbol => preferFilledSymbol;
+
+        public bool PreferSquaredButton => preferSquaredButton;
 
         public bool PromptBeforeOverwrite => promptBeforeOverwrite;
 
@@ -60,7 +71,7 @@ namespace Racer.MaterialSymbols.Editor
 
         public string FileName(bool isFilled)
         {
-            if (useNameDistinction)
+            if (useDistinctNames)
                 return isFilled ? "_fill" : "_no-fill";
 
             return string.Empty;
@@ -91,7 +102,8 @@ namespace Racer.MaterialSymbols.Editor
             DrawDefaultInspector();
             EditorGUILayout.Space(5);
             EditorGUILayout.HelpBox(
-                "Assuming the fields are greyed out(non-editable), then enable Debug mode while this asset is focused in the inspector, then switch back to Normal mode. The non-editable fields will become editable afterwards.\n\n" +
+                "Assuming the fields are greyed out(non-editable), then enable Debug mode while this asset is focused in the inspector, " +
+                "then switch back to Normal mode. The non-editable fields will become editable afterwards.\n\n" +
                 "Tip: Right-click the 'Symbol Save Path' field to reset to the default location.", MessageType.Info);
         }
     }
