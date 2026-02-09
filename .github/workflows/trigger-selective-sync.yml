@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master  # fires when the fork's master branch updates (e.g. via Sync fork)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run in dry mode'
+        required: false
+        default: 'false'
 
 jobs:
   trigger:
@@ -16,4 +22,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh workflow run "Selective Sync From Fork" --field dry_run=false
+          DRY_RUN_VALUE="${{ github.event.inputs.dry_run || 'false' }}"
+          gh workflow run "Selective Sync From Fork" --field dry_run="$DRY_RUN_VALUE"
