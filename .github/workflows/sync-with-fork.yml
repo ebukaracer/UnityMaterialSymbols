@@ -56,7 +56,7 @@ jobs:
           git pull origin main
           git checkout master -- URLs.md
           git add URLs.md
-          commit_msg=$'Update doc files(${{ steps.version.outputs.version }})\n\n## Changes(major+, minor*, fix-)\n\nSync URL changes with feature branch*\nUpdate readme-'
+          commit_msg=$'Update doc files(${{ steps.version.outputs.version }})\n\n## Changes(major+, minor*, fix-)\n\nSync URL changes with feature branch*'
 
           # DRY RUN MODE: only show commit message, stash changes
           if [[ "${{ env.DRY_RUN }}" == "true" ]]; then
